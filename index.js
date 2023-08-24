@@ -1,178 +1,114 @@
-let edadUsuario = prompt("bienvenido a EcoAlimentos,cual es tu edad?")
-let edadparseada = parseInt(edadUsuario)
-
-
-if(edadparseada >= 18){
-    alert("Sos mayor, podes comprar en nuestra pagina")
-}else {
-    alert("sos menor,no puedes realizar compras en nuestra pagina")
-}
-
-function saludar(usuario){
-        alert("bienvenido de nuevo, " + usuario);
-}
-
-let usuario = prompt("ingrese su alias");
-
-saludar(usuario);
 
 const productos = [
   {
     nombre: "Mix de Frutos Secos",
+    imagen:"multimedia/imagenes/mix-frutos-secos.jpg",
+    id:1,
     precioUnitario: 1500,
     precioMayorista: 12000,
   },
   {
     nombre: "Granola",
+    imagen:"multimedia/imagenes/granola.jpg",
+    id:2,
     precioUnitario: 1300,
     precioMayorista: 10000,
   },
   {
     nombre: "Barras Nutritivas",
+    imagen:"multimedia/imagenes/barritas-energeticas.jpg",
+    id:3,
     precioUnitario: 400,
     precioMayorista: 3000,
   },
   {
     nombre: "Mix Semillas",
+    imagen:"multimedia/imagenes/mix-semillas.jpg",
+    id:4,
     precioUnitario: 1000,
     precioMayorista: 8000,
   },
   {
     nombre: "Aceitunas",
+    imagen:"multimedia/imagenes/aceitunas.jpg",
+    id:5,
     precioUnitario: 800,
     precioMayorista: 6000,
   },
 ];
 
-const ecoAlimentos = {
-  saludar(usuario) {
-    alert("Bienvenido de nuevo, " + usuario);
-  },
 
-  mostrarPreciosMinoristas() {
-    let mensaje = "Lista de precios minoristas:\n";
-    for (const producto of productos) {
-      mensaje += `${producto.nombre}: $${producto.precioUnitario} por unidad\n`;
-    }
-    alert(mensaje);
-  },
 
-  mostrarPreciosMayoristas() {
-    let mensaje = "Lista de precios mayoristas:\n";
-    for (const producto of productos) {
-      mensaje += `${producto.nombre}: $${producto.precioMayorista} por 10 unidades\n`;
-    }
-    alert(mensaje);
-  },
 
-  solicitarTurnoYAbonar() {
-    let carrito = {};
-    let total = 0;
+const containerCards = document.querySelector(".container-cards")
 
-    let tipoCliente = prompt("¿Va a comprar como mayorista o minorista? (M/Mayorista o N/Minorista)").toUpperCase();
-    
-    if (tipoCliente === "M" || tipoCliente === "MAYORISTA") {
-      let mensajeAlimentos = "Escribe el número del alimento que deseas comprar (0 para finalizar):\n";
-      for (let i = 0; i < productos.length; i++) {
-        mensajeAlimentos += `${i + 1}: ${productos[i].nombre}\n`;
-      }
-      
-      while (true) {
-        let alimentoElegido = parseInt(prompt(mensajeAlimentos));
-        
-        if (alimentoElegido === 0) {
-          break;
-        }
+console.log( containerCards)
 
-        let cantidad = parseInt(prompt("Ingrese la cantidad de productos:"));
-        let producto = productos[alimentoElegido - 1];
+const cardsAHtml = array  => {
+  const cards = array.reduce((acc, element) => {
+    console.log(acc)
+    return acc + `
+        <div class="card" id="card-${element.id}">
+          <h2>
+            ${element.nombre}
+          </h2>
+          <figure class="container-card">
+            <img src="${element.imagen}" alt="imagen de ${element.nombre}">
+          </figure>
+          <h3>
+            precio minorista:$${element.precioUnitario}
+          </h3>
+          <h3>
+            precio mayorista:$${element.precioMayorista}
+          </h3>
+          <button class="button-card" id="button-${element.id}">
+            Agregar al carrito
+          </button>
 
-        if (producto) {
-          carrito[producto.nombre] = cantidad;
-          total += producto.precioMayorista * cantidad;
-        } else {
-          alert("Opción inválida");
-        }
-      }
-    } else if (tipoCliente === "N" || tipoCliente === "MINORISTA") {
-      let mensajeAlimentos = "Escribe el número del alimento que deseas comprar (0 para finalizar):\n";
-      for (let i = 0; i < productos.length; i++) {
-        mensajeAlimentos += `${i + 1}: ${productos[i].nombre}\n`;
-      }
-      
-      while (true) {
-        let alimentoElegido = parseInt(prompt(mensajeAlimentos));
-
-        if (alimentoElegido === 0) {
-          break;
-        }
-
-        let cantidad = parseInt(prompt("Ingrese la cantidad de productos:"));
-        let producto = productos[alimentoElegido - 1];
-
-        if (producto) {
-          carrito[producto.nombre] = cantidad;
-          total += producto.precioUnitario * cantidad;
-        } else {
-          alert("Opción inválida");
-        }
-      }
-    } else {
-      alert("Opción inválida. No se pudo determinar el tipo de cliente.");
-      return;
-    }
-
-    let factura = "Factura:\n";
-    for (const nombreProducto in carrito) {
-      factura += `${nombreProducto}: ${carrito[nombreProducto]} unidades - $${productos.find(p => p.nombre === nombreProducto).precioUnitario * carrito[nombreProducto]}\n`;
-    }
-    factura += `Total: $${total}`;
-
-    alert(factura);
-
-    let formaCobro = prompt("Ingrese la forma de cobro (Efectivo o Transferencia):");
-    alert(`Forma de cobro: ${formaCobro}`);
-
-    let fecha = prompt("Ingrese la fecha de entrega (dd/mm/aaaa):");
-    let turno = prompt("Ingrese el turno de entrega (Mañana o Tarde):");
-    alert(`Fecha de entrega: ${fecha}\nTurno: ${turno}`);
-  },
-};
-
-let opcion = "";
-while (opcion !== "4") {
-  opcion = prompt(
-    "¿Qué deseas hacer hoy?\n\n1 - Lista de precios minoristas\n2 - Lista de precios mayoristas\n3 - Solicitar turno de entrega y abonar\n4 - Salir"
-  );
-
-  switch (opcion) {
-    case "1":
-      ecoAlimentos.mostrarPreciosMinoristas();
-      break;
-    case "2":
-      ecoAlimentos.mostrarPreciosMayoristas();
-      break;
-    case "3":
-      ecoAlimentos.solicitarTurnoYAbonar();
-      break;
-    case "4":
-      alert("Gracias por comprar en EcoAlimentos");
-      break;
-    default:
-      alert("Opción inválida");
-      break;
-  }
+        </div>
+    `
+  }, "")
+  containerCards.innerHTML = cards
 }
 
 
 
+cardsAHtml(productos);
+
+const AllCards = document.querySelectorAll(".button-card")
 
 
+let productosCarrito = []
 
 
+const eventocards = (nodos, array) =>{
 
+    for (let i = 0 ; i < nodos.length ; i++ ){
 
+        nodos[i].onclick = (e) =>{
 
+          const id = e.currentTarget.id.slice(7)
+          const buscarProducto = array.find(element => element.id === Number(id))
+          productosCarrito.push(buscarProducto)
+          localStorage.setItem("productos",JSON.stringify(productosCarrito))
+          Toastify({
+            text: `se ha añadido a ${buscarProducto.nombre} al carrito`,
+            className: "info",
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            }
+          }).showToast();
+          
+
+        }
+
+    }
+
+}
+
+eventocards(AllCards,productos)
+
+ 
 
 
 

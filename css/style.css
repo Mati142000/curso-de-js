@@ -1,8 +1,39 @@
-main{
-    background-color: aqua;
+body{
+    margin: 0;
+}
+.container-cards{
+    display: flex;
+    flex-wrap:wrap; 
 }
 
-article p{
-    font-size: 50px;
-    color: brown;
+.container-carrito{
+    display: flex;
+    flex-wrap:wrap; 
 }
+.card {
+    margin: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+}
+
+h1{
+    font-size: 50px;
+}
+
+h2{
+    display: flex;
+    justify-content:center ;
+}
+.card img{
+    width:300px;
+    height: 400px;
+    object-fit: cover ;
+}
+
+/* .button-card{
+    width: 100px;
+    height: 100px;
+
+} */
