@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    
 }
 .container-cards{
     display: flex;
@@ -15,11 +16,11 @@ body{
     padding: 20px;
     display: flex;
     flex-direction:column;
-    justify-content: center;
+    justify-content:space-around;
 }
 
 h1{
-    font-size: 50px;
+    font-size: 55px;
 }
 
 h2{
@@ -32,8 +33,28 @@ h2{
     object-fit: cover ;
 }
 
-/* .button-card{
-    width: 100px;
-    height: 100px;
+.container-fluid {
+    background-color: rgb(151, 220, 220);
+}
 
-} */
+main{
+    background-color: bisque;
+}
+
+.div-footer{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: rgb(137, 191, 239);
+    margin: 20px;
+    padding: 10px;
+}
+
+.div-footer{
+    font-size: 25px;
+}
+
+.nav-item{
+    font-size: 30px;
+}
