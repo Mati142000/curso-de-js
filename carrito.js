@@ -1,6 +1,6 @@
-
 const containerCarrito = document.querySelector(".container-carrito");
 const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
+
 
 function ordenarProductosPorNombreAsc(productos) {
   return productos.slice().sort((a, b) => {
@@ -52,6 +52,7 @@ containerCarrito.addEventListener("click", (e) => {
             productosCarrito.splice(index, 1);
             localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
             cardsAHtml(productosCarrito, containerCarrito);
+
             Toastify({
                 text: `Se ha eliminado ${buscarProducto.nombre} del carrito`,
                 className: "info",
@@ -62,4 +63,6 @@ containerCarrito.addEventListener("click", (e) => {
         }
     }
 });
+
+
 
